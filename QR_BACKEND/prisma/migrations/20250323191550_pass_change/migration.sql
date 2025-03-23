@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "Pass" ALTER COLUMN "bookingDate" SET DATA TYPE TEXT,
+ALTER COLUMN "eventDate" SET DATA TYPE TEXT;
