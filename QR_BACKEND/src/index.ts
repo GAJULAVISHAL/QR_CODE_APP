@@ -41,7 +41,7 @@ const LoginInputSchema = z.object({
 
 const EventDetailsSchema = z.object({
   name : z.string(),
-  price : z.number(),
+  price : z.string(),
   date : z.string()
 })
 
@@ -56,7 +56,7 @@ app.post('/signup', async (c) => {
       return c.json({ error: 'Missing required fields' }, 400)
     }
     const validate = SignupInputSchema.safeParse({ email, password, userId })
-    if (!validate) {
+    if (!validate.success) {
       return c.json({
         msg: "invalid input type"
       })
@@ -92,7 +92,7 @@ app.post('/login', async (c) => {
   try {
     const LoginInput = await c.req.json()
     const InputValidate = LoginInputSchema.safeParse(LoginInput)
-    if(!InputValidate){
+    if(!InputValidate.success){
       return(
         c.json({
           msg : "Wrong Input formate"

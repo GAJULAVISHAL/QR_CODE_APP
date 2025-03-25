@@ -61,8 +61,16 @@ Create a `wrangler.toml` file in the backend directory:
 [vars]
 DATABASE_URL = "Prisma acclerate url from prisma data platform"
 ```
+### 5.Migrate your database
+```bash
+#In the backend directory
+npx prisma migrate dev --name "inti"
 
-### 5. Running the Application
+#Generate Prisma Client
+npx prisma generate --no-engine
+```
+
+### 6. Running the Application
 
 #### Start Frontend
 ```bash

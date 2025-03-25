@@ -9,6 +9,12 @@ export interface pass {
     qrCodeUrl: string
 }
 
+export interface Event{
+    name : string,
+    price : number,
+    date : string
+}
+
 export const usePass = ({ id }: { id: string }) => {
     const [loading, setLoading] = useState(true);
     const [pass, setPass] = useState<pass | undefined>(undefined);

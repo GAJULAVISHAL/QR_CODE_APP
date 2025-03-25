@@ -16,12 +16,18 @@ model User {
   pass  Pass[]
 }
 
+model event{
+  id  Int @id @default(autoincrement())
+  name  String
+  price Float
+  date String
+}
 
 model Pass {
   id          Int      @id @default(autoincrement())
   userId      Int
   user        User     @relation(fields: [userId], references: [userId])
-  personName  String   // Added personName field
+  personName  String   
   eventName   String
   age         String
   price       Float
