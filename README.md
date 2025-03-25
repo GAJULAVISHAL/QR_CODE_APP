@@ -14,13 +14,13 @@ This is a React-based QR Pass Generator application that allows users to create 
 ### 1. Clone the Repository
 ```bash
 git clone https://github.com/yourusername/qr-pass-generator.git
-cd qr-pass-generator
+cd QR_CODE_APP
 ```
 
 ### 2. Frontend Setup
 ```bash
 # Navigate to frontend directory
-cd frontend
+cd QR_FRONTEND
 
 # Install dependencies
 npm install
@@ -42,7 +42,7 @@ npm run dev
 ### 3. Backend (Cloudflare Workers) Setup
 ```bash
 # Navigate to backend directory
-cd ../backend
+cd ../QR_BACKEND
 
 # Install Cloudflare Workers CLI
 npm install 
@@ -113,10 +113,10 @@ npm run deploy
 4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-## License
-Specify your project's license here (e.g., MIT License)
+
 
 ## Contact
-Your Name - your.email@example.com
-Project Link: [https://github.com/yourusername/qr-pass-generator](https://github.com/yourusername/qr-pass-generator)
+Your Name - vishalgajula0709@gmail.com
+Project Link: [https://github.com/GAJULAVISHAL/QR_CODE_APP](https://github.com/GAJULAVISHAL/QR_CODE_APP)
+Live Link : [QR APP](https://qr-app-silk.vercel.app/)
 ```
