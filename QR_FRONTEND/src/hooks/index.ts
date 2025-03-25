@@ -1,45 +1,49 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
-export interface pass{
-    id:number,
-    personName : string,
-    eventName : string,
-    price : number,
-    eventDate : string,
-    qrCodeUrl : string
+export interface pass {
+    id: number,
+    personName: string,
+    eventName: string,
+    price: number,
+    eventDate: string,
+    qrCodeUrl: string
 }
 
 export const usePass = ({ id }: { id: string }) => {
-    const [loadingPass, setLoadingPass] = useState(true);
-    const [pass, setPass] = useState<pass>();
+    const [loading, setLoading] = useState(true);
+    const [pass, setPass] = useState<pass | undefined>(undefined);
 
     useEffect(() => {
-        axios.get(`${import.meta.env.VITE_BACKEND_URL}/pass/${id}`, {
-        })
-            .then(response => {
-                setPass(response.data.blog);
-                setLoadingPass(false);
-            })
-    }, [])
+        if (!id) return;
+        const fetchPass = async () => {
+            try {
+                const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/pass/${id}`)
+                setPass(response.data.pass);
+            } catch (error) {
+                console.error("Error fetching pass:", error);
+            } finally {
+                setLoading(false);
+            }
+        };
 
-    return {
-        loadingPass,
-        pass
-    }
+        fetchPass();
+    }, [id]);
+
+    return { loading, pass };
 }
 
-export const usePasses = ()=>{
+export const usePasses = () => {
     const [loading, setLoading] = useState<boolean>(true)
     const [passes, setPasses] = useState<pass[]>()
-    useEffect(()=>{
-        const id = localStorage.getItem("userID")
+    useEffect(() => {
+        const id = localStorage.getItem("userId")
         axios.get(`${import.meta.env.VITE_BACKEND_URL}/passes/${id}`)
-        .then(response=>{
-            setPasses(response.data.passes)
-            setLoading(false)
-        })
-    },[])
-    return{
-        loading,passes
+            .then(response => {
+                setPasses(response.data.passes)
+                setLoading(false)
+            })
+    }, [])
+    return {
+        loading, passes
     }
 }

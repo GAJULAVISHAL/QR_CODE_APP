@@ -1,4 +1,21 @@
-import {  usePasses } from "../hooks"
+import { Link } from "react-router-dom";
+import { usePasses } from "../hooks"
+const style = document.createElement('style');
+style.textContent = `
+  @keyframes shimmer {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(400%);
+    }
+  }
+  
+  .animate-shimmer {
+    animation: shimmer 2s infinite;
+  }
+`;
+document.head.appendChild(style);
 
 export const Passes = () => {
     const { loading, passes } = usePasses()
@@ -6,12 +23,97 @@ export const Passes = () => {
     if (loading) {
         return (
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-                <div className="border border-gray-200 rounded-md overflow-hidden shadow-sm w-full" ></div>
-                <div className="border border-gray-200 rounded-md overflow-hidden shadow-sm w-full" ></div>
-                <div className="border border-gray-200 rounded-md overflow-hidden shadow-sm w-full" ></div>
-                <div className="border border-gray-200 rounded-md overflow-hidden shadow-sm w-full" ></div>
-                <div className="border border-gray-200 rounded-md overflow-hidden shadow-sm w-full" ></div>
-                <div className="border border-gray-200 rounded-md overflow-hidden shadow-sm w-full" ></div>
+                <div className="flex justify-center items-center h-64 w-full">
+                    <div
+                        className={`
+                                    relative
+                                    w-80 h-60 
+                                    border border-gray-400 
+                                    rounded-md 
+                                    overflow-hidden 
+                                    shadow-sm
+                                    ${loading ? 'bg-gray-200' : 'bg-white'}
+                                `}>
+                        {loading && (
+                            <div className="absolute inset-0 overflow-hidden">
+                                <div className="h-full w-1/3 bg-gray-300 opacity-50 animate-shimmer" />
+                            </div>
+                        )}
+                    </div>
+                </div>
+                <div className="flex justify-center items-center h-64 w-full">
+                    <div
+                        className={`
+                                    relative
+                                    w-80 h-60 
+                                    border border-gray-400 
+                                    rounded-md 
+                                    overflow-hidden 
+                                    shadow-sm
+                                    ${loading ? 'bg-gray-200' : 'bg-white'}
+                                `}>
+                        {loading && (
+                            <div className="absolute inset-0 overflow-hidden">
+                                <div className="h-full w-1/3 bg-gray-300 opacity-50 animate-shimmer" />
+                            </div>
+                        )}
+                    </div>
+                </div>
+                <div className="flex justify-center items-center h-64 w-full">
+                    <div
+                        className={`
+                                    relative
+                                    w-80 h-60 
+                                    border border-gray-400 
+                                    rounded-md 
+                                    overflow-hidden 
+                                    shadow-sm
+                                    ${loading ? 'bg-gray-200' : 'bg-white'}
+                                `}>
+                        {loading && (
+                            <div className="absolute inset-0 overflow-hidden">
+                                <div className="h-full w-1/3 bg-gray-300 opacity-50 animate-shimmer" />
+                            </div>
+                        )}
+                    </div>
+                </div>
+                <div className="flex justify-center items-center h-64 w-full">
+                    <div
+                        className={`
+                                    relative
+                                    w-80 h-60 
+                                    border border-gray-400 
+                                    rounded-md 
+                                    overflow-hidden 
+                                    shadow-sm
+                                    ${loading ? 'bg-gray-200' : 'bg-white'}
+                                `}>
+                        {loading && (
+                            <div className="absolute inset-0 overflow-hidden">
+                                <div className="h-full w-1/3 bg-gray-300 opacity-50 animate-shimmer" />
+                            </div>
+                        )}
+                    </div>
+                </div>
+                <div className="flex justify-center items-center h-64 w-full">
+                    <div
+                        className={`
+                                    relative
+                                    w-80 h-60 
+                                    border border-gray-400 
+                                    rounded-md 
+                                    overflow-hidden 
+                                    shadow-sm
+                                    ${loading ? 'bg-gray-200' : 'bg-white'}
+                                `}>
+                        {loading && (
+                            <div className="absolute inset-0 overflow-hidden">
+                                <div className="h-full w-1/3 bg-gray-300 opacity-50 animate-shimmer" />
+                            </div>
+                        )}
+                    </div>
+                </div>
+
             </div>
         )
     }
@@ -49,7 +151,7 @@ export const Passes = () => {
                                     <strong>Attendee:</strong> {pass.personName}
                                 </p>
                                 <p className="text-sm">
-                                    <strong>Date:</strong> {pass.eventDate}
+                                    <strong>Event on:</strong> {pass.eventDate}
                                 </p>
                                 <p className="text-sm">
                                     <strong>Price:</strong> {pass.price}
@@ -60,6 +162,7 @@ export const Passes = () => {
                             <div className="flex mt-4 pt-3">
                                 <button className="flex-1 flex items-center justify-center py-2 text-sm text-gray-700 border rounded-md mr-2 hover:bg-gray-50"
                                 >
+                                    <Link to={`/pass/${pass.id}`} className="flex items-center justify-center">
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
                                         width="16"
@@ -76,7 +179,8 @@ export const Passes = () => {
                                         <line x1="12" y1="8" x2="12" y2="16"></line>
                                         <line x1="8" y1="12" x2="16" y2="12"></line>
                                     </svg>
-                                    View
+                                        View
+                                    </Link>
                                 </button>
                                 <button className="flex-1 flex items-center justify-center py-2 text-sm text-gray-700 border rounded-md hover:bg-gray-50">
                                     <svg
@@ -95,7 +199,7 @@ export const Passes = () => {
                                         <polyline points="7 10 12 15 17 10"></polyline>
                                         <line x1="12" y1="15" x2="12" y2="3"></line>
                                     </svg>
-                                    Download
+                                    <a href={pass.qrCodeUrl} download="qrcode.png">Download</a>
                                 </button>
                             </div>
                         </div>

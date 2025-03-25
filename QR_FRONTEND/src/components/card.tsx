@@ -1,49 +1,45 @@
+import { pass } from "../hooks";
 
-
-export default function WhiteBlueTicket({ qrCode }:{
-    qrCode : string
+export default function WhiteBlueTicket({ pass }: {
+  pass: pass
 }) {
-  const ticketNo = 12345; // Example ticket number
 
   return (
-    <div className="w-[600px] bg-white shadow-lg rounded-lg overflow-hidden">
-      <div className="flex">
-        {/* Left Panel (Blue Background, White Text) */}
-        <div className="bg-[#18181B] text-white w-4/5 pt-8 pb-4 px-12 rounded-l-lg">
-          {/* Top Row */}
-          <div className="flex items-center justify-between mb-4">
-            {/* QR Code instead of logo */}
-            <div className="flex items-center">
-              <img
-                src={qrCode}
-                className="w-20 h-20 object-contain rounded border border-white"
-              />
-            </div>
+    <div className="max-w-[700px] w-full bg-white shadow-xl shadow-blue-100 rounded-lg overflow-hidden">
+      <div className="flex flex-col md:flex-row">
+        {/* Left Panel (Dark Background, White Text) */}
+        <div className="bg-[#18181B] text-white md:w-3/4 w-full pt-8 pb-4 px-12 rounded-t-lg md:rounded-l-lg md:rounded-tr-none">
+          <div className="flex items-center justify-between mb-6">
             <span className="text-sm">
-              An AI launch event <strong>accelerate.builder.io</strong>
+              Ticket for: <strong className="text-base text-white">{pass.personName}</strong>
             </span>
           </div>
-
-          {/* Title */}
-          <h1 className="text-6xl mb-2">Accelerate &gt;&gt;&gt;</h1>
-
-          {/* Date & Time */}
-          <div className="flex items-center mb-4">
-            <span className="text-lg">March 13, 2024</span>
-            <span className="mx-3 text-lg">/</span>
-            <span className="text-lg">10 AM PST</span>
+          <h1 className="text-4xl md:text-6xl font-bold mb-4">{pass.eventName}</h1>
+          <div className="flex flex-col md:flex-row items-center mb-4 space-y-2 md:space-y-0 md:space-x-6">
+            <div className="flex flex-col items-start">
+              <span className="text-lg font-semibold">Event On:</span>
+              <span className="text-lg">{pass.eventDate}</span>
+            </div>
+            <div className="flex flex-col items-start">
+              <span className="text-lg font-semibold">Price:</span>
+              <span className="text-lg">₹ {pass.price}</span>
+            </div>
           </div>
-          
         </div>
 
         {/* Right Panel (White Background, Blue Text) */}
-        <div className="bg-white text-blue-700 py-8 px-4 text-center border-l-8 border-dashed border-[#18181B]">
-          <div className="text-sm mb-1">Id No.</div>
-          <div className="inline-block text-2xl font-semibold border-l-4 border-[#18181B] pl-2">
-            #{ticketNo}
+        <div className="bg-white text-blue-700 py-8 px-4 text-center border-t-8 md:border-l-8 md:border-t-0 border-dashed border-[#18181B] md:w-1/4 w-full flex flex-col justify-center">
+          <div className="mb-2 font-semibold">QR Code</div>
+          <div className="flex items-center justify-center">
+            <img
+              src={pass.qrCodeUrl}
+              alt="QR Code"
+              className="w-24 h-24 object-contain rounded border border-blue-700"
+            />
           </div>
         </div>
       </div>
     </div>
+
   );
 }

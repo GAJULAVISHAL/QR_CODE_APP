@@ -14,9 +14,19 @@ datasource db {
 //   passes  Pass[]
 // }
 
+model User {
+  id       Int    @id @default(autoincrement())
+  email    String @unique
+  password String
+  userId   Int    @unique
+  pass  Pass[]
+}
+
+
 model Pass {
   id          Int      @id @default(autoincrement())
-  userId      String
+  userId      Int
+  user        User     @relation(fields: [userId], references: [userId])
   personName  String   // Added personName field
   eventName   String
   age         String
@@ -24,5 +34,6 @@ model Pass {
   eventDate   String
   bookingDate String
   qrCodeUrl   String
-  createdAt DateTime @default(now())
+  createdAt   DateTime @default(now())
 }
+
