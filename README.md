@@ -91,6 +91,10 @@ npm run deploy
 - Database storage of generated passes
 - User pass management
 
+## Additional Feature
+- Create events 
+- Store the events in the database
+
 ## Technologies Used
 - React.js (Frontend)
 - Cloudflare Workers (Backend)
