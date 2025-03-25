@@ -102,7 +102,7 @@ const SignupForm = () => {
                                 onChange={(e) =>
                                     setFormData((prev) => ({
                                         ...prev,
-                                        userId: Number(e.target.value),
+                                        userId: isNaN(Number(e.target.value))?0:Number(e.target.value),
                                     }))
                                 }
                                 required
