@@ -11,13 +11,13 @@ export const Login = () => {
   });
   const [error, setError] = useState('');
 
-  const handleChange = useCallback((e:any) => {
+  const handleChange = useCallback((e: any) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   }, []);
 
   const handleSubmit = useCallback(
-    async (e:any) => {
+    async (e: any) => {
       e.preventDefault();
       if (!formData.email || !formData.password) {
         setError("Please fill in all fields.");
@@ -44,46 +44,44 @@ export const Login = () => {
   );
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="w-full max-w-md bg-white rounded-lg shadow-md p-4">
-        <div className="p-4">
+    <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
+      <div className="w-full max-w-sm bg-white rounded-lg shadow-md p-6">
+        <div className="text-center">
           <h2 className="text-2xl font-medium">Login to your account</h2>
         </div>
-        {error && <p className="text-red-500 text-sm text-center mb-4">{error}</p>}
-        <form onSubmit={handleSubmit}>
-          <div className="p-1 space-y-4">
-            <div className="space-y-2">
-              <label htmlFor="email" className="block text-gray-700">
-                Email
-              </label>
-              <input
-                id="email"
-                name="email"
-                type="email"
-                placeholder="Enter your email"
-                value={formData.email}
-                onChange={handleChange}
-                required
-                className="w-full p-1.5 border border-gray-300 rounded focus:outline-none focus:ring focus:border-blue-300"
-              />
-            </div>
-            <div className="space-y-2">
-              <label htmlFor="password" className="block text-gray-700">
-                Password
-              </label>
-              <input
-                id="password"
-                name="password"
-                type="password"
-                placeholder="Enter your password"
-                value={formData.password}
-                onChange={handleChange}
-                required
-                className="w-full p-1.5 border border-gray-300 rounded focus:outline-none focus:ring focus:border-blue-300"
-              />
-            </div>
+
+        {error && <p className="text-red-500 text-sm text-center mt-2">{error}</p>}
+
+        <form onSubmit={handleSubmit} className="mt-4 space-y-4">
+          <div>
+            <label htmlFor="email" className="block text-gray-700 text-sm">Email</label>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              placeholder="Enter your email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+              className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-300"
+            />
           </div>
-          <div className="p-2">
+
+          <div>
+            <label htmlFor="password" className="block text-gray-700 text-sm">Password</label>
+            <input
+              id="password"
+              name="password"
+              type="password"
+              placeholder="Enter your password"
+              value={formData.password}
+              onChange={handleChange}
+              required
+              className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-300"
+            />
+          </div>
+
+          <div>
             {loading ? (
               <div className="flex items-center justify-center">
                 <div className="animate-spin rounded-full h-8 w-8 border-4 border-gray-200 border-t-blue-600"></div>
@@ -91,7 +89,7 @@ export const Login = () => {
             ) : (
               <button
                 type="submit"
-                className="w-full bg-[#8B8B8D] text-white py-2 rounded"
+                className="w-full bg-[#8B8B8D] text-white py-2 rounded transition duration-300"
               >
                 Continue
               </button>

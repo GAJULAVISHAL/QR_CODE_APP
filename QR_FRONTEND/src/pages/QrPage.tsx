@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Passes } from '../components/Passes';
 import axios from "axios"
 import Navbar from '../components/Navbar';
+import WhiteBlueTicket from '../components/card';
 
 
 export default function QRCodePassGenerator() {
@@ -73,7 +74,7 @@ export default function QRCodePassGenerator() {
     };
 
     return (
-        <div className="flex flex-col items-center pt-8 min-h-screen bg-gray-100">
+        <div className="flex flex-col items-center  pt-8 min-h-screen bg-gray-100">
             <Navbar />
             <div className="flex justify-around items-center mb-4 bg-white pb-2 min-w-[60%] rounded-lg shadow-md">
                 <button
@@ -106,7 +107,7 @@ export default function QRCodePassGenerator() {
             </div>
 
 
-            {activeTab === 1 && <div className="max-w-lg mx-auto p-5 bg-white rounded-lg shadow-md border border-gray-100">
+            {activeTab === 1 && <div className="max-w-[750px] mx-auto p-5 bg-white rounded-lg shadow-md border border-gray-100">
                 {step === 1 && (
                     <div className="p-4 border border-gray-100 rounded-lg bg-gray-50">
                         <h2 className="text-base font-medium mb-3 text-gray-700">Pass Details</h2>
@@ -197,37 +198,17 @@ export default function QRCodePassGenerator() {
                 )}
 
                 {step === 2 && (
-                    <div className="p-4 border border-gray-100 rounded-lg bg-gray-50">
+                    <div className="p-4 border lg:w-[700px] border-gray-100 rounded-lg bg-gray-50">
                         <div className="flex flex-col md:flex-row md:items-start gap-6">
                             {/* Booking Details */}
-                            <div className="flex-1">
-                                <h2 className="text-lg font-semibold text-gray-700 mb-2">Booking Details</h2>
-                                <div className="p-4 rounded bg-white shadow-lg">
-                                    <div className="grid grid-cols-2 gap-y-3 gap-x-4 text-sm">
-                                        <p className="text-gray-600">User ID:</p>
-                                        <p className="font-medium">{formData.userId}</p>
-                                        <p className="text-gray-600">Name:</p>
-                                        <p className="font-medium">{formData.personName}</p>
-                                        <p className="text-gray-600">Age:</p>
-                                        <p className="font-medium">{formData.age}</p>
-                                        <p className="text-gray-600">Event:</p>
-                                        <p className="font-medium">{formData.eventName}</p>
-                                        <p className="text-gray-600">Price:</p>
-                                        <p className="font-medium">₹{formData.price}</p>
-                                        <p className="text-gray-600">Event Date:</p>
-                                        <p className="font-medium">{formData.eventDate}</p>
-                                        <p className="text-gray-600">Booking Date:</p>
-                                        <p className="font-medium">{formData.bookingDate}</p>
-                                    </div>
-                                </div>
-                            </div>
-                            {/* QR Code */}
-                            <div className="flex flex-col items-center">
-                                <h2 className="text-lg font-semibold mb-2 text-gray-700">Your QR Code</h2>
-                                <div className="w-48 h-48 bg-white flex items-center justify-center mb-4 p-2 shadow-sm rounded">
-                                    <img src={qrCode} alt="QR Code" className="max-w-full max-h-full" />
-                                </div>
-                            </div>
+                            <WhiteBlueTicket pass={{
+                                id: 0,
+                                personName: formData.personName,
+                                eventName: formData.eventName,
+                                price: formData.price,
+                                eventDate: formData.eventDate,
+                                qrCodeUrl: qrCode
+                            }} />
                         </div>
                         {/* Action Buttons */}
                         <div className="flex flex-col sm:flex-row justify-end space-y-2 sm:space-y-0 sm:space-x-3 mt-4">
